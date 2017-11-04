@@ -57,4 +57,28 @@ textarea {
     float: right;
     margin-right: 30px;
     margin-top: 10px;
+} 
+
+#mapbox {
+    height: 300px;
+    width: 450px;
+    background-color: red;
+    float: left;
+    margin: 10px;
+}
+
+#listbox {
+    height: 680px;
+    width: 450px;
+    background-color: yellow;
+    float: right;
+    margin: 10px;
+}
+
+#jobsbox {
+    height: 300px;
+    width: 450px;
+    background-color: green;
+    float: left;
+    margin: 10px;
 }
