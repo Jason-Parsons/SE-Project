@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VolsDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="job">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Zipcode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LocationLat" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LocationLong" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="NumVolsNeeded" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="jobPics">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Before" Type="varchar" MaxLength="50" />
+          <Property Name="After" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserAccess" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userAccess">
+          <Key>
+            <PropertyRef Name="UserAccess" />
+          </Key>
+          <Property Name="UserAccess" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccessLevel" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userJob">
+          <Key>
+            <PropertyRef Name="UserJobID" />
+          </Key>
+          <Property Name="UserJobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="JobID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Job_User">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="job" Type="Self.job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="job">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPics_Job">
+          <End Role="job" Type="Self.job" Multiplicity="1" />
+          <End Role="jobPics" Type="Self.jobPics" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="job">
+              <PropertyRef Name="JobID" />
+            </Principal>
+            <Dependent Role="jobPics">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserAccess">
+          <End Role="userAccess" Type="Self.userAccess" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccess">
+              <PropertyRef Name="UserAccess" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="UserAccess" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserJob_Job">
+          <End Role="job" Type="Self.job" Multiplicity="1" />
+          <End Role="userJob" Type="Self.userJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job">
+              <PropertyRef Name="JobID" />
+            </Principal>
+            <Dependent Role="userJob">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserJob_User">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="userJob" Type="Self.userJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="userJob">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VolsDBModelStoreContainer">
+          <EntitySet Name="job" EntityType="Self.job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jobPics" EntityType="Self.jobPics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userAccess" EntityType="Self.userAccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userJob" EntityType="Self.userJob" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Job_User" Association="Self.FK_Job_User">
+            <End Role="user" EntitySet="user" />
+            <End Role="job" EntitySet="job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPics_Job" Association="Self.FK_JobPics_Job">
+            <End Role="job" EntitySet="job" />
+            <End Role="jobPics" EntitySet="jobPics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserAccess" Association="Self.FK_User_UserAccess">
+            <End Role="userAccess" EntitySet="userAccess" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserJob_Job" Association="Self.FK_UserJob_Job">
+            <End Role="job" EntitySet="job" />
+            <End Role="userJob" EntitySet="userJob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserJob_User" Association="Self.FK_UserJob_User">
+            <End Role="user" EntitySet="user" />
+            <End Role="userJob" EntitySet="userJob" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VolsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="job">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocationLat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocationLong" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumVolsNeeded" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK_Job_User" FromRole="job" ToRole="user" />
+          <NavigationProperty Name="jobPic" Relationship="Self.FK_JobPics_Job" FromRole="job" ToRole="jobPics" />
+          <NavigationProperty Name="userJobs" Relationship="Self.FK_UserJob_Job" FromRole="job" ToRole="userJob" />
+        </EntityType>
+        <EntityType Name="jobPic">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Before" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="After" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="job" Relationship="Self.FK_JobPics_Job" FromRole="jobPics" ToRole="job" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserAccess" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="jobs" Relationship="Self.FK_Job_User" FromRole="user" ToRole="job" />
+          <NavigationProperty Name="userAccess1" Relationship="Self.FK_User_UserAccess" FromRole="user" ToRole="userAccess" />
+          <NavigationProperty Name="userJobs" Relationship="Self.FK_UserJob_User" FromRole="user" ToRole="userJob" />
+        </EntityType>
+        <EntityType Name="userAccess">
+          <Key>
+            <PropertyRef Name="UserAccess1" />
+          </Key>
+          <Property Name="UserAccess1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccessLevel" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK_User_UserAccess" FromRole="userAccess" ToRole="user" />
+        </EntityType>
+        <EntityType Name="userJob">
+          <Key>
+            <PropertyRef Name="UserJobID" />
+          </Key>
+          <Property Name="UserJobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="JobID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="job" Relationship="Self.FK_UserJob_Job" FromRole="userJob" ToRole="job" />
+          <NavigationProperty Name="user" Relationship="Self.FK_UserJob_User" FromRole="userJob" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_Job_User">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="job" Type="Self.job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="job">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobPics_Job">
+          <End Role="job" Type="Self.job" Multiplicity="1" />
+          <End Role="jobPics" Type="Self.jobPic" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="job">
+              <PropertyRef Name="JobID" />
+            </Principal>
+            <Dependent Role="jobPics">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserJob_Job">
+          <End Role="job" Type="Self.job" Multiplicity="1" />
+          <End Role="userJob" Type="Self.userJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="job">
+              <PropertyRef Name="JobID" />
+            </Principal>
+            <Dependent Role="userJob">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserAccess">
+          <End Role="userAccess" Type="Self.userAccess" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userAccess">
+              <PropertyRef Name="UserAccess1" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="UserAccess" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserJob_User">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="userJob" Type="Self.userJob" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="userJob">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VolsDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="jobs" EntityType="Self.job" />
+          <EntitySet Name="jobPics" EntityType="Self.jobPic" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="userAccesses" EntityType="Self.userAccess" />
+          <EntitySet Name="userJobs" EntityType="Self.userJob" />
+          <AssociationSet Name="FK_Job_User" Association="Self.FK_Job_User">
+            <End Role="user" EntitySet="users" />
+            <End Role="job" EntitySet="jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobPics_Job" Association="Self.FK_JobPics_Job">
+            <End Role="job" EntitySet="jobs" />
+            <End Role="jobPics" EntitySet="jobPics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserJob_Job" Association="Self.FK_UserJob_Job">
+            <End Role="job" EntitySet="jobs" />
+            <End Role="userJob" EntitySet="userJobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserAccess" Association="Self.FK_User_UserAccess">
+            <End Role="userAccess" EntitySet="userAccesses" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserJob_User" Association="Self.FK_UserJob_User">
+            <End Role="user" EntitySet="users" />
+            <End Role="userJob" EntitySet="userJobs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VolsDBModelStoreContainer" CdmEntityContainer="VolsDBEntities">
+          <EntitySetMapping Name="jobs">
+            <EntityTypeMapping TypeName="VolsDBModel.job">
+              <MappingFragment StoreEntitySet="job">
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="LocationLat" ColumnName="LocationLat" />
+                <ScalarProperty Name="LocationLong" ColumnName="LocationLong" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NumVolsNeeded" ColumnName="NumVolsNeeded" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jobPics">
+            <EntityTypeMapping TypeName="VolsDBModel.jobPic">
+              <MappingFragment StoreEntitySet="jobPics">
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="Before" ColumnName="Before" />
+                <ScalarProperty Name="After" ColumnName="After" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="VolsDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="VolsDBModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserAccess" ColumnName="UserAccess" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userAccesses">
+            <EntityTypeMapping TypeName="VolsDBModel.userAccess">
+              <MappingFragment StoreEntitySet="userAccess">
+                <ScalarProperty Name="UserAccess1" ColumnName="UserAccess" />
+                <ScalarProperty Name="AccessLevel" ColumnName="AccessLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userJobs">
+            <EntityTypeMapping TypeName="VolsDBModel.userJob">
+              <MappingFragment StoreEntitySet="userJob">
+                <ScalarProperty Name="UserJobID" ColumnName="UserJobID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

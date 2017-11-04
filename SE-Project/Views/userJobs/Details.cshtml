@@ -1,0 +1,34 @@
+﻿@model SE_Project.Models.userJob
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>userJob</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.job.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.job.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserJobID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
