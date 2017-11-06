@@ -57,7 +57,23 @@ textarea {
     float: right;
     margin-right: 30px;
     margin-top: 10px;
-} 
+}
+
+#postedbox {
+    height: 600px;
+    width: 450px;
+    background-color: yellow;
+    float: left;
+    margin: 10px;
+}
+
+#newpostbox {
+    height: 600px;
+    width: 450px;
+    background-color: red;
+    float: right;
+    margin: 10px;
+}
 
 #mapbox {
     height: 300px;
