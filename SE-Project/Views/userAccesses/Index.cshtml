@@ -12,22 +12,28 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.UserAccess1)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.AccessLevel)
         </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccessLevel)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserAccess1 }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserAccess1 }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserAccess1 })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserAccess1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccessLevel)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserAccess1 }) |
+                @Html.ActionLink("Details", "Details", new { id = item.UserAccess1 }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserAccess1 })
+            </td>
+        </tr>
+    }
 
 </table>

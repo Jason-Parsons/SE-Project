@@ -54,7 +54,7 @@ namespace SE_Project.Controllers
             {
                 db.users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Success");
             }
 
             ViewBag.UserAccess = new SelectList(db.userAccesses, "UserAccess1", "UserAccess1", user.UserAccess);
