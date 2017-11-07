@@ -9,6 +9,7 @@ namespace SE_Project.Controllers
     public class organizerController : Controller
     {
         // GET: organizer
+        //[Authorize]
         public ActionResult Index()
         {
             return View();

@@ -158,7 +158,6 @@
     <Compile Include="Controllers\userAccessesController.cs" />
     <Compile Include="Controllers\userJobsController.cs" />
     <Compile Include="Controllers\usersController.cs" />
-    <Compile Include="Controllers\joinController.cs" />
     <Compile Include="Controllers\volunteerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -282,7 +281,6 @@
     <Content Include="Views\userJobs\Details.cshtml" />
     <Content Include="Views\userJobs\Edit.cshtml" />
     <Content Include="Views\userJobs\Index.cshtml" />
-    <Content Include="Views\join\Index.cshtml" />
     <Content Include="Views\login\Index.cshtml" />
     <Content Include="Views\organizer\Index.cshtml" />
     <Content Include="Views\volunteer\Index.cshtml" />
