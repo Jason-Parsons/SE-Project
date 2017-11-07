@@ -25,8 +25,8 @@ namespace SE_Project.Models
         public string City { get; set; }
         public string State { get; set; }
         public string Zipcode { get; set; }
-        public decimal LocationLat { get; set; }
-        public decimal LocationLong { get; set; }
+        public Nullable<decimal> LocationLat { get; set; }
+        public Nullable<decimal> LocationLong { get; set; }
         public System.DateTime Date { get; set; }
         public System.TimeSpan Time { get; set; }
         public string Description { get; set; }

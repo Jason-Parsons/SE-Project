@@ -15,9 +15,10 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        
         <form style="float:initial">
-            <input type="radio" name="AccessLevel" value="Organizer" checked> Organizer
-            <input type="radio" name="AccessLevel" value="Volunteer"> Volunteer<br>
+            <input type="radio" name="UserAccess" value="0" checked> Volunteer
+            <input type="radio" name="UserAccess" value="1"> Organizer<br>
         </form>
 
         <div class="form-group">
