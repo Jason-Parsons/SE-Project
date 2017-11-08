@@ -21,6 +21,11 @@ namespace SE_Project.Controllers
             return View(users.ToList());
         }
 
+        public ActionResult Success()
+        {
+            return View();
+        }
+
         // GET: users/Details/5
         public ActionResult Details(int? id)
         {
