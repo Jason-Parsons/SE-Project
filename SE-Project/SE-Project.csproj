@@ -206,6 +206,7 @@
     <Content Include="Content\Images\ParkCleanUp.jpg" />
     <Content Include="Content\Images\parkPic.jpg" />
     <Content Include="Content\bootstrap-flatly.css" />
+    <Content Include="Content\Images\VolCleanUp.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
