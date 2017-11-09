@@ -59,7 +59,7 @@ namespace SE_Project.Controllers
             {
                 db.users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Success");
+                return RedirectToAction("Index", "login");
             }
 
             ViewBag.UserAccess = new SelectList(db.userAccesses, "UserAccess1", "UserAccess1", user.UserAccess);
@@ -67,6 +67,7 @@ namespace SE_Project.Controllers
         }
 
         // GET: users/Edit/5
+       
         public ActionResult Edit(int? id)
         {
             if (id == null)
