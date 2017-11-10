@@ -99,7 +99,7 @@ namespace SE_Project.Controllers
             {
                 db.users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index", "login");
+                return RedirectToAction("Login");
             }
 
             ViewBag.UserAccess = new SelectList(db.userAccesses, "UserAccess1", "UserAccess1", user.UserAccess);
