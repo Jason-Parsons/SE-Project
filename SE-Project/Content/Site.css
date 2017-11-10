@@ -98,3 +98,13 @@ textarea {
     float: left;
     margin: 10px;
 }
+#login-div{
+    position: absolute;
+    left:40%;
+    top:40%;
+    border:1px solid #ccc;
+    padding:10px 10px;
+}
+.field-validation-error{
+    color: red;
+}

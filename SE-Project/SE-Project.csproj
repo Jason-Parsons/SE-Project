@@ -163,7 +163,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\loginModel.cs" />
     <Compile Include="Models\job.cs">
       <DependentUpon>UserModel.tt</DependentUpon>
     </Compile>
@@ -197,7 +196,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UserModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\join.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -283,8 +281,7 @@
     <Content Include="Views\userJobs\Details.cshtml" />
     <Content Include="Views\userJobs\Edit.cshtml" />
     <Content Include="Views\userJobs\Index.cshtml" />
-    <Content Include="Views\join\Index.cshtml" />
-    <Content Include="Views\login\Index.cshtml" />
+    <Content Include="Views\users\Login.cshtml" />
     <Content Include="Views\organizer\Index.cshtml" />
     <Content Include="Views\volunteer\Index.cshtml" />
     <Content Include="Views\users\Success.cshtml" />

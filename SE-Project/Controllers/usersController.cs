@@ -21,9 +21,33 @@ namespace SE_Project.Controllers
             return View(users.ToList());
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         public ActionResult Success()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Authorize(SE_Project.Models.user userModel)
+        {
+            using (VolsDBEntities db = new VolsDBEntities())
+            {
+                var userDetails = db.users.Where(x => x.Email == userModel.Email && x.Password == userModel.Password).FirstOrDefault();
+                if(userDetails == null)
+                {
+                    userModel.loginErrorMessage = "Wrong Email or Password.";
+                    return View("Login", userModel);
+                }
+                else
+                {
+                    Session["userID"] = userDetails.UserID;
+                    return RedirectToAction("Index","volunteer");
+                }
+            } 
         }
 
         // GET: users/Details/5
