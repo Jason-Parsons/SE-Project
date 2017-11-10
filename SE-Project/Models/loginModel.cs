@@ -10,7 +10,7 @@ namespace SE_Project.Models
     public class loginModel
     {
         [Required()]
-        public string userName { get; }
+        public string Email { get; }
         [Required()]
         public string password { get; }
     }
