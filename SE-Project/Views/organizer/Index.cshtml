@@ -1,16 +1,18 @@
 ﻿@{
-//if (Session["userID"] == null)
-//{
-//     Response.Redirect("~/users/login");
-// }
+if (Session["userID"] == null)
+{
+     Response.Redirect("~/users/login");
+ }
 }
+
+
  
 @{
     ViewBag.Title = "Organizer";
 }
 
 <h1>Organizer Control page</h1>
-<!-- <h2>Welcome "atSymbolHere"Session["userName"].ToString()</h2> -->
+<h2>Welcome @Session["userName"].ToString()</h2>
 <body>
     <div id="largebox">
         <div id="postedbox">

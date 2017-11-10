@@ -31,6 +31,7 @@ namespace SE_Project.Controllers
         {
             using (VolsDBEntities db = new VolsDBEntities())
             {
+
                 var userDetails = db.users.Where(x => x.Email == userModel.Email && x.Password == userModel.Password).FirstOrDefault();
                 if (userDetails == null)
                 {
@@ -41,8 +42,19 @@ namespace SE_Project.Controllers
                 {
                     Session["userID"] = userDetails.UserID;
                     Session["userAccess"] = userDetails.UserAccess;
-                    Session["userName"] = userDetails.Email;
-                    return RedirectToAction("Index","volunteer");
+                    Session["userName"] = userDetails.FirstName;
+                    if (userDetails.UserAccess == 1)
+                    {
+                        return RedirectToAction("Index", "volunteer");
+                    }
+                    else if(userDetails.UserAccess == 2)
+                    {
+                        return RedirectToAction("Index", "organizer");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "volunteer");
+                    }
                 }
             } 
         }
