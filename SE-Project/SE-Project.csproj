@@ -153,12 +153,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\jobPicsController.cs" />
     <Compile Include="Controllers\jobsController.cs" />
-    <Compile Include="Controllers\loginController.cs" />
     <Compile Include="Controllers\organizerController.cs" />
     <Compile Include="Controllers\userAccessesController.cs" />
     <Compile Include="Controllers\userJobsController.cs" />
     <Compile Include="Controllers\usersController.cs" />
-    <Compile Include="Controllers\joinController.cs" />
     <Compile Include="Controllers\volunteerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

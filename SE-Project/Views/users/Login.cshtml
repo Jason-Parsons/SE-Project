@@ -11,7 +11,7 @@
     @Html.AntiForgeryToken()
 
     <div id="login-div">
-        @using (Html.BeginForm("Authorize","users",FormMethod.Post))
+        @using (Html.BeginForm("Login","user"))
         {
             <table>
                 <tr>
@@ -26,6 +26,7 @@
                     <td></td>
                     <td>@Html.ValidationMessageFor(model => model.Email)</td>
                 </tr>
+                <tr></tr>
                 <tr>
                     <td>@Html.LabelFor(model => model.Password)</td>
                     <td>@Html.EditorFor(model => model.Password)</td>
