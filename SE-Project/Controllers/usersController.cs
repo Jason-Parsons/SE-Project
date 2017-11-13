@@ -26,7 +26,6 @@ namespace SE_Project.Controllers
             return View();
         }
 
-       
         public ActionResult Login(SE_Project.Models.user userModel)
         {
             using (VolsDBEntities db = new VolsDBEntities())
@@ -35,7 +34,7 @@ namespace SE_Project.Controllers
                 var userDetails = db.users.Where(x => x.Email == userModel.Email && x.Password == userModel.Password).FirstOrDefault();
                 if (userDetails == null)
                 {
-                   // userModel.loginErrorMessage = "Wrong Email or Password.";
+                    //userModel.loginErrorMessage = "Wrong Email or Password.";
                     return View("Login", userModel);
                 }
                 else

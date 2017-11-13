@@ -14,8 +14,8 @@
 <h1>Organizer Control page</h1>
 <h2>Welcome @Session["userName"].ToString()</h2>
 <body>
-    <div id="largebox">
-        <div id="postedbox">
+    <div >
+        <div >
             <table class="table">
                 <tr>
                     <th>
@@ -31,10 +31,29 @@
                         @Html.DisplayNameFor(model => model.Description)
                     </th>
                 </tr>
-                <tr>
 
-                </tr>
-            </table>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Time)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.JobID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.JobID })
+                        </td>
+                    </tr>
+                }
+        </table>
         </div>
         <a href="@Url.Action("create","jobs")">Post New Job</a>
     </div>
