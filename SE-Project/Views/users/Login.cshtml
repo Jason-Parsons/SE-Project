@@ -14,17 +14,14 @@
         @using (Html.BeginForm("Login","user"))
         {
             <table>
-                <tr>
-                    <td></td>
-                    <td style="text-decoration:underline">User Login</td>
-                </tr>
+
                 <tr>
                     <td>@Html.LabelFor(model => model.Email)</td>
                     <td>@Html.EditorFor(model => model.Email)</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>@Html.ValidationMessageFor(model => model.Email)</td>
+                    <!-- <td>@Html.ValidationMessageFor(model => model.Email)</td> -->
                 </tr>
                 <tr></tr>
                 <tr>
@@ -33,13 +30,9 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>@Html.ValidationMessageFor(model => model.Password)</td>
+                  <!--  <td>@Html.ValidationMessageFor(model => model.Password)</td> -->
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        <label class="field-validation-error">@Html.DisplayFor(model => model.loginErrorMessage)</label>
-                    </td>
-                </tr>
+
                 <tr>
                     <td></td>
                     <td>
