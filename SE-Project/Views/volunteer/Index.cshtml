@@ -1,10 +1,16 @@
-﻿
+﻿ @{ 
+   if (Session["userID"] == null)
+   {
+       Response.Redirect("~/users/login");
+   }
+} 
+
 @{
      ViewBag.Title = "Volunteer";
 }
 
-<h2>Volunteer Control page</h2>
-
+<h1>Volunteer Control page</h1>
+<h2>Welcome @Session["userName"].ToString()</h2>
 <body>
      <div id="largebox">
           <div id="mapbox">

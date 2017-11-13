@@ -26,6 +26,46 @@ namespace SE_Project.Controllers
             return View();
         }
 
+       
+        public ActionResult Login(SE_Project.Models.user userModel)
+        {
+            using (VolsDBEntities db = new VolsDBEntities())
+            {
+
+                var userDetails = db.users.Where(x => x.Email == userModel.Email && x.Password == userModel.Password).FirstOrDefault();
+                if (userDetails == null)
+                {
+                   // userModel.loginErrorMessage = "Wrong Email or Password.";
+                    return View("Login", userModel);
+                }
+                else
+                {
+                    Session["userID"] = userDetails.UserID;
+                    Session["userAccess"] = userDetails.UserAccess;
+                    Session["userName"] = userDetails.FirstName;
+                    if (userDetails.UserAccess == 1)
+                    {
+                        return RedirectToAction("Index", "volunteer");
+                    }
+                    else if(userDetails.UserAccess == 2)
+                    {
+                        return RedirectToAction("Index", "organizer");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "volunteer");
+                    }
+                }
+            } 
+        }
+
+        public ActionResult LogOut()
+        {
+            int userId = (int)Session["userID"];
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
+        }
+
         // GET: users/Details/5
         public ActionResult Details(int? id)
         {
@@ -59,7 +99,7 @@ namespace SE_Project.Controllers
             {
                 db.users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index", "login");
+                return RedirectToAction("Login");
             }
 
             ViewBag.UserAccess = new SelectList(db.userAccesses, "UserAccess1", "UserAccess1", user.UserAccess);

@@ -11,6 +11,8 @@ namespace SE_Project.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class user
     {
@@ -21,14 +23,28 @@ namespace SE_Project.Models
             this.userJobs = new HashSet<userJob>();
         }
     
+
         public int UserID { get; set; }
+        [DisplayName("First Name")]
+        [Required(ErrorMessage ="This field is required.")]
         public string FirstName { get; set; }
+        [DisplayName("Middle Name")]
+        [Required(ErrorMessage = "This field is required.")]
         public string MiddleName { get; set; }
+        [DisplayName("Last Name")]
+        [Required(ErrorMessage = "This field is required.")]
         public string LastName { get; set; }
+        [Required(ErrorMessage = "This field is required.")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "This field is required.")]
         public string Phone { get; set; }
+        [DataType(DataType.Password) ]
+        [Required(ErrorMessage = "This field is required.")]
         public string Password { get; set; }
-        public int UserAccess { get; set; }
+        [Required(ErrorMessage = "This field is required.")]
+        public int UserAccess { get; set; } = 1;
+
+        public string loginErrorMessage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<job> jobs { get; set; }

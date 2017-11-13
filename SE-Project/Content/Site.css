@@ -19,6 +19,7 @@
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
+
 textarea {
     max-width: 280px;
 }
@@ -60,8 +61,8 @@ textarea {
 }
 
 #postedbox {
-    height: 600px;
-    width: 450px;
+    height: 550px;
+    width: 950px;
     background-color: yellow;
     float: left;
     margin: 10px;
@@ -97,4 +98,16 @@ textarea {
     background-color: green;
     float: left;
     margin: 10px;
+}
+
+#login-div{
+    position: absolute;
+    left:40%;
+    top:40%;
+    border:1px solid #ccc;
+    padding:10px 10px;
+}
+
+.field-validation-error{
+    color: red;
 }

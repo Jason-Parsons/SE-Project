@@ -1,32 +1,43 @@
-﻿
+﻿@{
+    if (Session["userID"] == null)
+    {
+        Response.Redirect("~/users/login");
+    }
+}
+
+@model IEnumerable<SE_Project.Models.job>
+
 @{
     ViewBag.Title = "Organizer";
 }
 
-<h2>Organizer Control page</h2>
-
+<h1>Organizer Control page</h1>
+<h2>Welcome @Session["userName"].ToString()</h2>
 <body>
     <div id="largebox">
         <div id="postedbox">
             <p>List of jobs your posted</p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Time)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                </tr>
+                <tr>
+
+                </tr>
+            </table>
         </div>
-        <div id="newpostbox">
-            <p>Area to post new jobs</p>
-
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-
-                <div class="form-horizontal">
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                        <div class="form-group">
-
-
-                        </div>
-               </div>
-            }
-        </div>
+        <a href="@Url.Action("create","jobs")">Post New Job</a>
     </div>
+    <a href="@Url.Action("LogOut","users")">Logout</a>
 </body>
