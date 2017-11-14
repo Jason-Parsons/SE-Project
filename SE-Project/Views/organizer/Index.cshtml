@@ -1,31 +1,61 @@
-﻿
+﻿@{
+    if (Session["userID"] == null)
+    {
+        Response.Redirect("~/users/login");
+    }
+}
+
+@model IEnumerable<SE_Project.Models.job>
+
 @{
     ViewBag.Title = "Organizer";
 }
 
-<h2>Organizer Control page</h2>
+<h1>Organizer Control page</h1>
+<h2>Welcome @Session["userName"].ToString()</h2>
 <body>
-    <div id="largebox">
-        <div id="postedbox">
-            <p>List of jobs your posted</p>
-        </div>
-        <div id="newpostbox">
-            <p>Area to post new jobs</p>
+    <div >
+        <div >
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Time)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                </tr>
 
-            @using (Html.BeginForm())
+                @foreach (var item in Model)
             {
-                @Html.AntiForgeryToken()
-
-                <div class="form-horizontal">
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                        <div class="form-group">
-
-
-                        </div>
-               </div>
-            }
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Time)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.JobID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.JobID })
+                        </td>
+                    </tr>
+                }
+        </table>
         </div>
+        <a href="@Url.Action("create","jobs")">Post New Job</a>
     </div>
+    <a href="@Url.Action("LogOut","users")">Logout</a>
 </body>
