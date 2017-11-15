@@ -18,7 +18,7 @@ namespace SE_Project.Controllers
 
         public ActionResult Index()
         {
-            if (Session["isLoggedIn"] == "yes")
+            if ((string)Session["isLoggedIn"] == "yes")
             {
                 int accessLevel = (int)Session["userAccess"];
                 int id = (int)Session["userID"];
