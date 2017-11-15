@@ -16,6 +16,7 @@ namespace SE_Project.Controllers
         private VolsDBEntities db = new VolsDBEntities();
 
         // GET: organizer
+        //[Authorize]
         public ActionResult Index()
         {
             int id = (int) Session["userID"];

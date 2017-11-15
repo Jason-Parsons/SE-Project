@@ -9,6 +9,7 @@ namespace SE_Project.Controllers
     public class volunteerController : Controller
     {
         // GET: volunteer
+        //[Authorize]
         public ActionResult Index()
         {
             return View();
