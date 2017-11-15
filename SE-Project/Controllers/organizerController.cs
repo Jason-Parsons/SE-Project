@@ -18,7 +18,8 @@ namespace SE_Project.Controllers
         // GET: organizer
         public ActionResult Index()
         {
-            var list = db.jobs.Where(x => x.CreatedBy == 16);
+            int id = (int) Session["userID"];
+            var list = db.jobs.Where(x => x.CreatedBy == id);
 
             return View(list);
         }
