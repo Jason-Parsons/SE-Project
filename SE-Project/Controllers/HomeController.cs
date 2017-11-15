@@ -10,8 +10,15 @@ namespace SE_Project.Controllers
     {
         public ActionResult Index()
         {
-            Session["isLoggedIn"] = "no";
-            return View();
+            if (Session["isLoggedIn"] == "yes")
+            {
+                return View();
+            }
+            else
+            {
+                Session["isLoggedIn"] = "no";
+                return View();
+            }
         }
 
         public ActionResult About()
