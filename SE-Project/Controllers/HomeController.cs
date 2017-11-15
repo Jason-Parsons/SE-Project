@@ -10,6 +10,7 @@ namespace SE_Project.Controllers
     {
         public ActionResult Index()
         {
+            Session["isLoggedIn"] = "no";
             return View();
         }
 

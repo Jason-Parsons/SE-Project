@@ -32,6 +32,7 @@ namespace SE_Project.Controllers
             {
 
                 var userDetails = db.users.Where(x => x.Email == userModel.Email && x.Password == userModel.Password).FirstOrDefault();
+
                 if (userDetails == null)
                 {
                     //userModel.loginErrorMessage = "Wrong Email or Password.";
@@ -42,6 +43,7 @@ namespace SE_Project.Controllers
                     Session["userID"] = userDetails.UserID;
                     Session["userAccess"] = userDetails.UserAccess;
                     Session["userName"] = userDetails.FirstName;
+                    Session["isLoggedIn"] = "yes";
                     if (userDetails.UserAccess == 1)
                     {
                         return RedirectToAction("Index", "volunteer");

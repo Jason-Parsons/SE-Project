@@ -15,14 +15,29 @@ namespace SE_Project.Controllers
     {
         private VolsDBEntities db = new VolsDBEntities();
 
-        // GET: organizer
-        //[Authorize]
+
         public ActionResult Index()
         {
-            int id = (int) Session["userID"];
-            var list = db.jobs.Where(x => x.CreatedBy == id);
+            if (Session["isLoggedIn"] == "yes")
+            {
+                int accessLevel = (int)Session["userAccess"];
+                int id = (int)Session["userID"];
+                var list = db.jobs.Where(x => x.CreatedBy == id);
 
-            return View(list);
+                if (accessLevel == 2 || accessLevel == 3)
+                {
+                    return View(list);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "volunteer");
+                }
+            }
+
+            else
+            {
+                return RedirectToAction("Login", "users");
+            }
         }
     }
 }
