@@ -40,7 +40,6 @@ namespace SE_Project.Controllers
         public ActionResult Create()
         {
             ViewBag.CreatedBy = new SelectList(db.users, "UserID", "FirstName");
-            ViewBag.JobID = new SelectList(db.jobPics, "JobID", "Before");
             return View();
         }
 
@@ -55,7 +54,7 @@ namespace SE_Project.Controllers
             {
                 db.jobs.Add(job);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "organizer");
             }
 
             ViewBag.CreatedBy = new SelectList(db.users, "UserID", "FirstName", job.CreatedBy);
@@ -77,7 +76,7 @@ namespace SE_Project.Controllers
             }
             ViewBag.CreatedBy = new SelectList(db.users, "UserID", "FirstName", job.CreatedBy);
             ViewBag.JobID = new SelectList(db.jobPics, "JobID", "Before", job.JobID);
-            return View(job);
+            return RedirectToAction("Index", "organizer");
         }
 
         // POST: jobs/Edit/5
