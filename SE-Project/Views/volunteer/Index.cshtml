@@ -19,7 +19,7 @@
 
                     var mapProp = {
                          center: new google.maps.LatLng(34.999247, -81.971272),
-                         zoom: 14, //14 is enough to see a 1 mile radius around the center
+                         zoom: 13, //14 is enough to see a 1 mile radius around the center
                          mapTypeId: google.maps.MapTypeId.HYBRID
                     };
 
@@ -51,13 +51,110 @@
         <div id="listbox">
 
             <p>List of jobs inside your search area</p>
+                <table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor( jobs => JobsModel.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MiddleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.userAccess1.UserAccess1)
+        </th>
+        <th></th>
+    </tr>
+   @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MiddleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.userAccess1.UserAccess1)
+        </td>
+
+    </tr>
+}
+    </table>
+                
+                     
+                
+            
 
         </div>
 
         <div id="jobsbox">
 
             <p>List of jobs that have been signed up for</p>
-
+            <table style="width:34%; height: 111px;" border="5">
+                    <tr>
+                        <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                    <tr>
+                       <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                    <tr>
+                       <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                    <tr>
+                       <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                    <tr>
+                       <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                    <tr>
+                       <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                <tr>
+                       <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                <tr>
+                       <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                <tr>
+                       <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+                <tr>
+                       <td rowspan="1" style="line-height: normal; border: thin solid #000090">&nbsp;</td>
+                    </tr>
+               
+                </table>
+            
         </div>
 
     </div>
