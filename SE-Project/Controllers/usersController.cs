@@ -26,23 +26,41 @@ namespace SE_Project.Controllers
             return View();
         }
 
-       
         public ActionResult Login(SE_Project.Models.user userModel)
         {
             using (VolsDBEntities db = new VolsDBEntities())
             {
 
                 var userDetails = db.users.Where(x => x.Email == userModel.Email && x.Password == userModel.Password).FirstOrDefault();
-                if (userDetails == null)
+
+                if (userDetails == null && (string)Session["isLoggedIn"] != "yes")
                 {
-                   // userModel.loginErrorMessage = "Wrong Email or Password.";
+                    //userModel.loginErrorMessage = "Wrong Email or Password.";
                     return View("Login", userModel);
+                }
+                else if ((string)Session["isLoggedIn"] == "yes")
+                {
+                    int accessLevel = (int)Session["userAccess"];
+
+                    if (accessLevel == 1)
+                    {
+                        return RedirectToAction("Index", "volunteer");
+                    }
+                    else if (accessLevel == 2)
+                    {
+                        return RedirectToAction("Index", "organizer");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "volunteer");
+                    }
                 }
                 else
                 {
                     Session["userID"] = userDetails.UserID;
                     Session["userAccess"] = userDetails.UserAccess;
                     Session["userName"] = userDetails.FirstName;
+                    Session["isLoggedIn"] = "yes";
                     if (userDetails.UserAccess == 1)
                     {
                         return RedirectToAction("Index", "volunteer");

@@ -10,8 +10,8 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        @using (Html.BeginForm("Login","user"))
+    <div >
+        @using (Html.BeginForm("Login", "user"))
         {
             <table>
 
@@ -21,7 +21,6 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <!-- <td>@Html.ValidationMessageFor(model => model.Email)</td> -->
                 </tr>
                 <tr></tr>
                 <tr>
@@ -30,7 +29,6 @@
                 </tr>
                 <tr>
                     <td></td>
-                  <!--  <td>@Html.ValidationMessageFor(model => model.Password)</td> -->
                 </tr>
 
                 <tr>
