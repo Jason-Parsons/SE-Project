@@ -33,10 +33,27 @@ namespace SE_Project.Controllers
 
                 var userDetails = db.users.Where(x => x.Email == userModel.Email && x.Password == userModel.Password).FirstOrDefault();
 
-                if (userDetails == null)
+                if (userDetails == null && (string)Session["isLoggedIn"] != "yes")
                 {
                     //userModel.loginErrorMessage = "Wrong Email or Password.";
                     return View("Login", userModel);
+                }
+                else if ((string)Session["isLoggedIn"] == "yes")
+                {
+                    int accessLevel = (int)Session["userAccess"];
+
+                    if (accessLevel == 1)
+                    {
+                        return RedirectToAction("Index", "volunteer");
+                    }
+                    else if (accessLevel == 2)
+                    {
+                        return RedirectToAction("Index", "organizer");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "volunteer");
+                    }
                 }
                 else
                 {
