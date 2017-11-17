@@ -1,4 +1,23 @@
-﻿ @{ 
+﻿ <head>
+     <style type="text/css">
+         .auto-style1 {
+             height: 23px;
+         }
+         .auto-style2 {
+             border-color: #000000;
+             border-width: 2px;
+             padding-left: 6px;
+             padding-right: 4px;
+             padding-top: 1px;
+             padding-bottom: 1px;
+         }
+         .auto-style5 {
+             border-style: solid;
+             border-width: 4px;
+         }
+     </style>
+ </head>
+ @{ 
    if (Session["userID"] == null)
    {
        Response.Redirect("~/users/login");
@@ -64,13 +83,52 @@
 
 <div id="listbox">
 
-     <p>List of jobs inside your search area</p>
+     <p><table style="width:100%;">
+          <caption>
+                 List of jobs inside your search area</caption>
+         <tr>
+              <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                 <td class="auto-style2">&nbsp;</td>
+         </tr>
+         <tr>
+             <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                 <td class="auto-style2">&nbsp;</td>
+         </tr>
+         <tr>
+              <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                 <td class="auto-style2">&nbsp;</td>
+         </tr>
+         </table>
+     </p>
 
 </div>
 
 <div id="jobsbox">
 
-     <p>List of jobs that have been signed up for</p>
+     <p>
+         <table border="1" style="width:100%;">
+             <caption class="auto-style5">
+                 List of jobs that have been signed up for</caption>
+             <tr>
+                 <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                 <td class="auto-style2">&nbsp;</td>
+             </tr>
+             <tr>
+                  <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                 <td class="auto-style2">&nbsp;</td>
+             </tr>
+             <tr>
+                  <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style2">&nbsp;</td>
+                 <td class="auto-style2">&nbsp;</td>
+             </tr>
+         </table>
+     </p>
 
 </div>
 
