@@ -50,6 +50,8 @@ namespace SE_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "JobID,Address,City,State,Zipcode,LocationLat,LocationLong,Date,Time,Description,NumVolsNeeded,CreatedBy")] job job)
         {
+            string totalAddress = "Address" + ", " + "City" + ", " + "State" + ", " + "Zipcode";
+
             if (ModelState.IsValid)
             {
                    string myAddress = "Address" + ", " + " City" + ", " + "Zipcode" + "," + "United States";

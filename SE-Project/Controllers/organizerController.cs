@@ -10,7 +10,7 @@ using SE_Project.Models;
 
 
 namespace SE_Project.Controllers
-{
+{ 
     public class organizerController : Controller
     {
         private VolsDBEntities db = new VolsDBEntities();
