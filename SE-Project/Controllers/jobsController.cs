@@ -54,7 +54,12 @@ namespace SE_Project.Controllers
 
             if (ModelState.IsValid)
             {
-                db.jobs.Add(job);
+                   string myAddress = "Address" + ", " + " City" + ", " + "Zipcode" + "," + "United States";
+                   // var geocoder = new google.maps.Geocoder();
+
+                // private string src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBsV_j3UnupXN7XKDIIldbskUI8IbhnNuw&callback=initMap";
+                 
+                     db.jobs.Add(job);
                 db.SaveChanges();
                 return RedirectToAction("Index", "organizer");
             }
