@@ -14,71 +14,47 @@
 <body>
      <div id="largebox">
           <div id="mapbox">
-          
-               <p><button onclick="geoFindMe()">Search for jobs</button></p>
-             <div id="out" style="float:left;width:425px;height:50px; margin-left:12px"></div>
-               <div id="googleMap" style="float:left;width:425px;height:275px;margin-left:12px"></div>
 
-                   <script>
-                        function geoFindMe() {
-                             var output = document.getElementById("out");
+               <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+               <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+               <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                <h3>Filterable Table</h3>
+                <p>Type something in the input field to search the table for first names, last names or emails:</p>
+                <input class="form-control" id="myInput" type="text" placeholder="Search city...">
+               
 
-                             if (!navigator.geolocation) {
-                                  output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-                                  return;
-                             }
+                  <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
+                  </div>
 
-                             function success(position) {
-                                  var latitude = position.coords.latitude;
-                                  var longitude = position.coords.longitude;
-
-                                  output.innerHTML = '<p>Latitude is ' + latitude.toFixed(5) + '° <br>Longitude is ' + longitude.toFixed(5) + '°</p>';
-
-                                  var mapProp = {
-                                       center: new google.maps.LatLng(latitude.toFixed(5), longitude.toFixed(5)),
-                                       zoom: 13,
-                                  };
-
-                                  navigator.geolocation.getCurrentPosition(success, error);
-
-                                  var marker = new google.maps.Marker({ position: mapProp.center });
-
-                                  map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                                  marker.setMap(map);
-                                  
-                             }
-
-                             function error() {
-                                  output.innerHTML = "Unable to retrieve your location";
-                             }
-
-                             output.innerHTML = "<p>Locating…</p>";
-
-                             navigator.geolocation.getCurrentPosition(success, error);
-                        }
-                        
-                    </script>                  
-                           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsV_j3UnupXN7XKDIIldbskUI8IbhnNuw&callback=map"></script>
+                    <script>
+                         $(document).ready(function () {
+                              $("#myInput").on("keyup", function () {
+                                   var value = $(this).val().toLowerCase();
+                                   $("#myTable tr").filter(function () {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                   });
+                              });
+                         });
+                    </script>
+                   
+                    </div>
 
 
 
-<div id="listbox">
+                              <div id="listbox">
 
-     <p>List of jobs inside your search area</p>
-     <script>
-                        function myMap() {
+                                   <p>List of jobs inside your search area</p>
+                                    
 
-                        }
-     </script>
-</div>
+                              </div>
 
-<div id="jobsbox">
+                              <div id="jobsbox">
 
-     <p>List of jobs that have been signed up for</p>
+                                   <p>List of jobs that have been signed up for</p>
 
-</div>
 
-    </div>
-     </div>
-</body>
+                              </div>
+
+     </div >
+</body >
 
