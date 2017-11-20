@@ -1,24 +1,31 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data;
+using System.Data.Entity;
+using System.Net;
+using SE_Project.Models;
+
 
 namespace SE_Project.Controllers
 {
     public class volunteerController : Controller
     {
-        // GET: volunteer
-        //[Authorize]
+        private VolsDBEntities db = new VolsDBEntities();
+
+
         public ActionResult Index()
         {
             if ((string)Session["isLoggedIn"] == "yes")
             {
                 int accessLevel = (int)Session["userAccess"];
+                var list = db.jobs;
 
                 if (accessLevel == 1 || accessLevel == 3)
                 {
-                    return View();
+                    return View(list);
                 }
                 else
                 {

@@ -1,23 +1,4 @@
-﻿ <head>
-     <style type="text/css">
-         .auto-style1 {
-             height: 23px;
-         }
-         .auto-style2 {
-             border-color: #000000;
-             border-width: 2px;
-             padding-left: 6px;
-             padding-right: 4px;
-             padding-top: 1px;
-             padding-bottom: 1px;
-         }
-         .auto-style5 {
-             border-style: solid;
-             border-width: 4px;
-         }
-     </style>
- </head>
- @{ 
+﻿ @{ 
    if (Session["userID"] == null)
    {
        Response.Redirect("~/users/login");
@@ -79,86 +60,21 @@
                     </script>                  
                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsV_j3UnupXN7XKDIIldbskUI8IbhnNuw&callback=map"></script>
 
-              @model IEnumerable<SE_Project.Models.job>
-              
-              <div id="listbox">
 
 
-                  <div>
-                      <div>
-                          <table class="table">
-                              <tr>
-                                  <th>
-                                      @Html.DisplayNameFor(model => model.Address)
-                                  </th>
-                                  <th>
-                                      @Html.DisplayNameFor(model => model.Date)
-                                  </th>
-                                  <th>
-                                      @Html.DisplayNameFor(model => model.Time)
-                                  </th>
-                                  <th>
-                                      @Html.DisplayNameFor(model => model.Description)
-                                  </th>
-                              </tr>
+                    <div id="listbox">
 
-                              @foreach (var item in Model)
-            {
-                                  <tr>
-                                      <td>
-                                          @Html.DisplayFor(modelItem => item.Address)
-                                      </td>
-                                      <td>
-                                          @Html.DisplayFor(modelItem => item.Date)
-                                      </td>
-                                      <td>
-                                          @Html.DisplayFor(modelItem => item.Time)
-                                      </td>
-                                      <td>
-                                          @Html.DisplayFor(modelItem => item.Description)
-                                      </td>
-                                  </tr>
-                              }
-                          </table>
-                      </div>
-                      <a href="@Url.Action("create","jobs")">Post New Job</a>
-                  </div>
-                  <a href="@Url.Action("LogOut","users")">Logout</a>
-              </div>
+                         <p>List of jobs inside your search area</p>
 
-                      </body>
-                  
+                    </div>
 
-                  
+                    <div id="jobsbox">
 
-                  <div id="jobsbox">
+                         <p>List of jobs that have been signed up for</p>
 
-                      <p>
-                          <table border="1" style="width:100%;">
-                              <caption class="auto-style5">
-                                  List of jobs that have been signed up for
-                              </caption>
-                              <tr>
-                                  <td class="auto-style2">&nbsp;</td>
-                                  <td class="auto-style2">&nbsp;</td>
-                                  <td class="auto-style2">&nbsp;</td>
-                              </tr>
-                              <tr>
-                                  <td class="auto-style2">&nbsp;</td>
-                                  <td class="auto-style2">&nbsp;</td>
-                                  <td class="auto-style2">&nbsp;</td>
-                              </tr>
-                              <tr>
-                                  <td class="auto-style2">&nbsp;</td>
-                                  <td class="auto-style2">&nbsp;</td>
-                                  <td class="auto-style2">&nbsp;</td>
-                              </tr>
-                          </table>
-                      </p>
+                    </div>
 
-                  </div>
-
-</div>
-    </div>
+                </div>
+        </div>
 </body>
 
