@@ -17,9 +17,6 @@ namespace SE_Project.Controllers
         // GET: jobPics
         public ActionResult Index()
         {
-            int id = (int)Session["userID"];
-            var list = db.jobs.Where(x => x.CreatedBy == id);
-
             var jobPics = db.jobPics.Include(j => j.job);
             return View(jobPics.ToList());
         }
