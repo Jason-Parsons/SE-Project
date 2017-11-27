@@ -77,9 +77,9 @@ textarea {
 }
 
 #mapbox {
-    height: 300px;
-    width: 450px;
-    background-color: red;
+    height: 200px;
+    width: 400px;
+    background-color: grey;
     float: left;
     margin: 10px;
 }
