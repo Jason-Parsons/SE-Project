@@ -12,46 +12,99 @@
 <h1>Volunteer Control Pannel</h1>
 <h2>Welcome @Session["userName"].ToString()</h2>
 <body>
-     <div id="largebox">
-          <div id="mapbox">
+    <div id="largebox">
+        <div id="mapbox">
 
-               <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-               <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-               <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-                <h3>Filterable Table</h3>
-                <p>Type something in the input field to search the table for city, state or zipcode:</p>
-                <input class="form-control" id="myInput" type="text" placeholder="Search city...">
-               
-
-                  <p>Note that we start the search in tbody, to prevent filtering the table headers.</p>
-           </div>
-
-                    <script>
-                         $(document).ready(function () {
-                              $("#myInput").on("keyup", function () {
-                                   var value = $(this).val().toLowerCase();
-                                   $("#myTable tr").filter(function () {
-                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                                   });
-                              });
-                         });
-                    </script>
-                   
-       </div>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <h3>Find Jobs</h3>
+            <input class="form-control" id="myInput" type="text" placeholder="Search city...">
+        </div>
+    </div>
 
 
 
-                  <div id="listbox">
+    @model IEnumerable<SE_Project.Models.job>
 
-                  <p>List of jobs inside your search area</p>
-                                    
+    <div id="listbox">
 
-                  </div>
 
-                  <div id="jobsbox">
-                       
-                  <p>List of jobs that have been signed up for</p>
+        <div>
+            
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Date)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.City)
+                            </th>
+                        </tr>
+                     </thead>
+                    <tbody id="myTable">
+                        @foreach (var item in Model)
+            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Add Job", "Edit", new { id = item.JobID })
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                </table>
+            </div>
+            
+       
+    </div>
 
-     </div >
-</body >
 
+
+
+    <div id="jobsbox">
+
+        <p>
+            <table border="1" style="width:100%;">
+                <caption class="auto-style5">
+                    List of jobs that have been signed up for
+                </caption>
+                <tr>
+                    <td class="auto-style2">&nbsp;</td>
+                    <td class="auto-style2">&nbsp;</td>
+                    <td class="auto-style2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="auto-style2">&nbsp;</td>
+                    <td class="auto-style2">&nbsp;</td>
+                    <td class="auto-style2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="auto-style2">&nbsp;</td>
+                    <td class="auto-style2">&nbsp;</td>
+                    <td class="auto-style2">&nbsp;</td>
+                </tr>
+            </table>
+        </p>
+
+    </div>
+    <a href="@Url.Action("LogOut","users")">Logout</a>
+</body>
