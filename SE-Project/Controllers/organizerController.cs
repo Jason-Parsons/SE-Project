@@ -22,6 +22,7 @@ namespace SE_Project.Controllers
             {
                 int accessLevel = (int)Session["userAccess"];
                 int id = (int)Session["userID"];
+
                 var list = db.jobs.Where(x => x.CreatedBy == id);
 
                 if (accessLevel == 2 || accessLevel == 3)

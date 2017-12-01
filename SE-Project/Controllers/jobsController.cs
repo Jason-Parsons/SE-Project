@@ -17,8 +17,26 @@ namespace SE_Project.Controllers
         // GET: jobs
         public ActionResult Index()
         {
-            var jobs = db.jobs.Include(j => j.user).Include(j => j.jobPic);
-            return View(jobs.ToList());
+            if ((string)Session["isLoggedIn"] == "yes")
+            {
+                int accessLevel = (int)Session["userAccess"];
+                int id = (int)Session["userID"];
+                var list = db.jobs.Where(x => x.CreatedBy == id);
+
+                if (accessLevel == 2 || accessLevel == 3)
+                {
+                    return View(list);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "volunteer");
+                }
+            }
+
+            else
+            {
+                return RedirectToAction("Login", "users");
+            }
         }
 
         // GET: jobs/Details/5
@@ -39,7 +57,7 @@ namespace SE_Project.Controllers
         // GET: jobs/Create
         public ActionResult Create()
         {
-            ViewBag.CreatedBy = new SelectList(db.users, "UserID", "FirstName");
+           ViewBag.CreatedBy = new SelectList(db.users, "UserID", "FirstName");
             return View();
         }
 
@@ -50,21 +68,17 @@ namespace SE_Project.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "JobID,Address,City,State,Zipcode,LocationLat,LocationLong,Date,Time,Description,NumVolsNeeded,CreatedBy")] job job)
         {
-            string totalAddress = "Address" + ", " + "City" + ", " + "State" + ", " + "Zipcode";
-
             if (ModelState.IsValid)
             {
-                   string myAddress = "Address" + ", " + " City" + ", " + "Zipcode" + "," + "United States";
-                   // var geocoder = new google.maps.Geocoder();
-
+                // var geocoder = new google.maps.Geocoder();
                 // private string src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBsV_j3UnupXN7XKDIIldbskUI8IbhnNuw&callback=initMap";
                  
-                     db.jobs.Add(job);
+                db.jobs.Add(job);
                 db.SaveChanges();
                 return RedirectToAction("Index", "organizer");
             }
-
-            ViewBag.CreatedBy = new SelectList(db.users, "UserID", "FirstName", job.CreatedBy);
+            int id = (int)Session["userID"];
+            ViewBag.CreatedBy = new SelectList(db.users.Where(x => x.UserID == id), "UserID", "FirstName", job.CreatedBy);
             ViewBag.JobID = new SelectList(db.jobPics, "JobID", "Before", job.JobID);
             return View(job);
         }
@@ -83,7 +97,7 @@ namespace SE_Project.Controllers
             }
             ViewBag.CreatedBy = new SelectList(db.users, "UserID", "FirstName", job.CreatedBy);
             ViewBag.JobID = new SelectList(db.jobPics, "JobID", "Before", job.JobID);
-            return RedirectToAction("Index", "organizer");
+            return View(job);
         }
 
         // POST: jobs/Edit/5
@@ -99,7 +113,7 @@ namespace SE_Project.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CreatedBy = new SelectList(db.users, "UserID", "FirstName", job.CreatedBy);
+            ViewBag.CreatedBy = Session["userID"];
             ViewBag.JobID = new SelectList(db.jobPics, "JobID", "Before", job.JobID);
             return View(job);
         }

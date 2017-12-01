@@ -21,8 +21,10 @@ namespace SE_Project.Controllers
             if ((string)Session["isLoggedIn"] == "yes")
             {
                 int accessLevel = (int)Session["userAccess"];
-                var list = db.jobs;
 
+                 var list = db.jobs;
+
+                var user = (int)Session["userID"];
                 if (accessLevel == 1 || accessLevel == 3)
                 {
                     return View(list);
