@@ -24,11 +24,12 @@
         </EntityType>
         <EntityType Name="jobPics">
           <Key>
-            <PropertyRef Name="JobID" />
+            <PropertyRef Name="jobPicID" />
           </Key>
-          <Property Name="JobID" Type="int" Nullable="false" />
+          <Property Name="JobID" Type="int" />
           <Property Name="Before" Type="varchar" MaxLength="50" />
           <Property Name="After" Type="varchar" MaxLength="50" />
+          <Property Name="jobPicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -81,8 +82,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_JobPics_Job">
-          <End Role="job" Type="Self.job" Multiplicity="1" />
-          <End Role="jobPics" Type="Self.jobPics" Multiplicity="0..1" />
+          <End Role="job" Type="Self.job" Multiplicity="0..1" />
+          <End Role="jobPics" Type="Self.jobPics" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="job">
               <PropertyRef Name="JobID" />
@@ -183,11 +184,13 @@
         <EntityType Name="jobPic">
           <Key>
             <PropertyRef Name="JobID" />
+            <PropertyRef Name="jobPicID" />
           </Key>
-          <Property Name="JobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="JobID" Type="Int32" annotation:StoreGeneratedPattern="None" />
           <Property Name="Before" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="After" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="job" Relationship="Self.FK_JobPics_Job" FromRole="jobPics" ToRole="job" />
+          <Property Name="jobPicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -348,6 +351,7 @@
           <EntitySetMapping Name="jobPics">
             <EntityTypeMapping TypeName="VolsDBModel.jobPic">
               <MappingFragment StoreEntitySet="jobPics">
+                <ScalarProperty Name="jobPicID" ColumnName="jobPicID" />
                 <ScalarProperty Name="JobID" ColumnName="JobID" />
                 <ScalarProperty Name="Before" ColumnName="Before" />
                 <ScalarProperty Name="After" ColumnName="After" />
