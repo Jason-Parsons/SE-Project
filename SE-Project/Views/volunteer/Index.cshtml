@@ -25,8 +25,10 @@
 
 
 
-    @model IEnumerable<SE_Project.Models.job>
-    @model IEnumerable<SE_Project.Models.userJob>
+    @{ 
+        var x = ViewBag.table1 as IEnumerable<SE_Project.Models.job>;
+        var y = ViewBag.table2 as IEnumerable<SE_Project.Models.userJob>;
+    }
 
     <div id="listbox">
 
@@ -37,21 +39,21 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Description)
+                                Description
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Date)
+                               Date
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Address)
+                               Address
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.City)
+                               City
                             </th>
                         </tr>
                      </thead>
                     <tbody id="myTable">
-                        @foreach (var item in Model)
+                        @foreach (var item in x)
             {
                             <tr>
                                 <td>
@@ -67,7 +69,7 @@
                                     @Html.DisplayFor(modelItem => item.City)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Add Job", "Edit", new { UserJobID = item.JobID }) <!--Session["userID"] })-->
+                                    @Html.ActionLink("Add Job", "Edit", new { id = item.JobID })
                                 </td>
                             </tr>
                         }
@@ -88,33 +90,33 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Address)
+                   Address
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Date)
+                   Date
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Time)
+                   Time
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    Description
                 </th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var item in y)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Address)
+                        @Html.DisplayFor(modelItem => item.job.Address)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Date)
+                        @Html.DisplayFor(modelItem => item.job.Date)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Time)
+                        @Html.DisplayFor(modelItem => item.job.Time)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Description)
+                        @Html.DisplayFor(modelItem => item.job.Description)
                     </td>
                 </tr>
             }
@@ -123,4 +125,6 @@
 
     <a href="@Url.Action("LogOut","users")">Logout</a>
 </div>
-</body>
+
+
+
