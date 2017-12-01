@@ -26,10 +26,10 @@ namespace SE_Project.Models
         }
     
         public virtual DbSet<job> jobs { get; set; }
-        public virtual DbSet<jobPic> jobPics { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<userAccess> userAccesses { get; set; }
         public virtual DbSet<userJob> userJobs { get; set; }
+        public virtual DbSet<jobPic> jobPics { get; set; }
     }
 }
