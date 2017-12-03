@@ -14,10 +14,8 @@ namespace SE_Project.Models
     
     public partial class jobPic
     {
-        public int JobID { get; set; }
-        public string Before { get; set; }
-        public string After { get; set; }
-    
-        public virtual job job { get; set; }
+        public string jobID { get; set; }
+        public string before { get; set; }
+        public string after { get; set; }
     }
 }

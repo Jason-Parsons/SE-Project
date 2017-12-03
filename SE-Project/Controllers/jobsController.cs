@@ -79,7 +79,7 @@ namespace SE_Project.Controllers
             }
             int id = (int)Session["userID"];
             ViewBag.CreatedBy = new SelectList(db.users.Where(x => x.UserID == id), "UserID", "FirstName", job.CreatedBy);
-            ViewBag.JobID = new SelectList(db.jobPics, "JobID", "Before", job.JobID);
+            
             return View(job);
         }
 
@@ -96,7 +96,7 @@ namespace SE_Project.Controllers
                 return HttpNotFound();
             }
             ViewBag.CreatedBy = new SelectList(db.users, "UserID", "FirstName", job.CreatedBy);
-            ViewBag.JobID = new SelectList(db.jobPics, "JobID", "Before", job.JobID);
+            
             return View(job);
         }
 
@@ -114,7 +114,7 @@ namespace SE_Project.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CreatedBy = Session["userID"];
-            ViewBag.JobID = new SelectList(db.jobPics, "JobID", "Before", job.JobID);
+            
             return View(job);
         }
 
