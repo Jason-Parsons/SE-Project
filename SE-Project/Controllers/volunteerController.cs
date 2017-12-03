@@ -9,6 +9,7 @@ using System.Net;
 using SE_Project.Models;
 
 
+
 namespace SE_Project.Controllers
 {
     public class volunteerController : Controller
@@ -21,11 +22,14 @@ namespace SE_Project.Controllers
             if ((string)Session["isLoggedIn"] == "yes")
             {
                 int accessLevel = (int)Session["userAccess"];
-                var list = db.jobs;
+                int ID = (int)Session["userID"];
+                var List = db.userJobs.Where(x => x.UserID == ID);
+                ViewBag.table1 = (from s in db.jobs select s).ToList();
+                ViewBag.table2 = (List).ToList();
 
                 if (accessLevel == 1 || accessLevel == 3)
                 {
-                    return View(list);
+                    return View();
                 }
                 else
                 {
@@ -39,5 +43,9 @@ namespace SE_Project.Controllers
             }
             
         }
+
+
+
+
     }
 }
