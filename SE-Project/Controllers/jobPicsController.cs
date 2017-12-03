@@ -39,7 +39,7 @@ namespace SE_Project.Controllers
         // GET: jobPics/Create
         public ActionResult Create()
         {
-            ViewBag.JobID = new SelectList(db.jobs, "JobID", "Address");
+            ViewBag.JobID = new SelectList(db.jobs, "JobID", "Description");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace SE_Project.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.JobID = new SelectList(db.jobs, "JobID", "Address", jobPic.JobID);
+            ViewBag.JobID = new SelectList(db.jobs, "JobID", "Description", jobPic.JobID);
             return View(jobPic);
         }
 

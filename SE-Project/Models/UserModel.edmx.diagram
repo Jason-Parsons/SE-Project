@@ -15,11 +15,9 @@
         <AssociationConnector Association="VolsDBModel.FK_JobPics_Job" ManuallyRouted="false" />
         <AssociationConnector Association="VolsDBModel.FK_UserJob_Job" ManuallyRouted="true" >
           <ConnectorPoint PointX="6.125" PointY="3.125" />
-          <ConnectorPoint PointX="6.125" PointY="2.9802864583333326" />
-          <ConnectorPoint PointX="6.2109395" PointY="2.9802864583333326" />
-          <ConnectorPoint PointX="6.2109395" PointY="2.7290364583333324" />
-          <ConnectorPoint PointX="5.625" PointY="2.7290364583333324" />
-          <ConnectorPoint PointX="5.625" PointY="2.3485950640290518" />
+          <ConnectorPoint PointX="6.125" PointY="2.9802864583333335" />
+          <ConnectorPoint PointX="5.000002" PointY="2.9802864583333335" />
+          <ConnectorPoint PointX="5.000002" PointY="2.6052864583333335" />
         </AssociationConnector>
         <AssociationConnector Association="VolsDBModel.FK_User_UserAccess" ManuallyRouted="false" />
         <AssociationConnector Association="VolsDBModel.FK_UserJob_User" ManuallyRouted="false" />
