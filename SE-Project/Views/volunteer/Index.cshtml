@@ -69,7 +69,8 @@
                                     @Html.DisplayFor(modelItem => item.City)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Add Job", "Edit", new { id = item.JobID })
+                                    @Html.ActionLink("Add Job", "Edit", new { JID = item.JobID}, new { UID = (int)Session["userID"] })
+
                                 </td>
                             </tr>
                         }

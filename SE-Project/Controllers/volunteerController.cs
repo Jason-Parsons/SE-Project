@@ -43,5 +43,10 @@ namespace SE_Project.Controllers
             }
             
         }
+        
+        public ActionResult Add_Job(int JID, int UID)
+          {
+
+          }
     }
 }
