@@ -44,7 +44,12 @@ namespace SE_Project.Controllers
             
         }
 
-
+        public ActionResult Add_Job()
+        {
+            
+           
+            return RedirectToAction("Index", "volunteer");
+        }
 
 
     }
