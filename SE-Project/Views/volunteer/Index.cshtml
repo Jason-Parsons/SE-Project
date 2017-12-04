@@ -69,8 +69,7 @@
                                     @Html.DisplayFor(modelItem => item.City)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Add Job", "Edit", new { JID = item.JobID}, new { UID = (int)Session["userID"] })
-
+                                    @Html.ActionLink("Add Job", "Add_Job")
                                 </td>
                             </tr>
                         }
@@ -119,6 +118,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.job.Description)
                     </td>
+                    <td>
+                        @Html.ActionLink("Remove Job", "RemoveJob", "userJobs", new { id = item.JobID },null)
+                    </td>
                 </tr>
             }
         </table>
@@ -126,6 +128,6 @@
 
     <a href="@Url.Action("LogOut","users")">Logout</a>
 </div>
-
+    </body>
 
 
