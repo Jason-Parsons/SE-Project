@@ -25,16 +25,15 @@ namespace SE_Project.Models
         public string City { get; set; }
         public string State { get; set; }
         public string Zipcode { get; set; }
-        public Nullable<decimal> LocationLat { get; set; }
-        public Nullable<decimal> LocationLong { get; set; }
         public System.DateTime Date { get; set; }
         public System.TimeSpan Time { get; set; }
         public string Description { get; set; }
         public string NumVolsNeeded { get; set; }
         public int CreatedBy { get; set; }
+        public string before { get; set; }
+        public string after { get; set; }
     
         public virtual user user { get; set; }
-        public virtual jobPic jobPic { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<userJob> userJobs { get; set; }
     }

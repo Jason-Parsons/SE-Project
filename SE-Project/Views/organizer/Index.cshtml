@@ -47,16 +47,12 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.JobID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.JobID })|
-                            @Html.ActionLink("Post Pictures", "Create", "jobPics", "html helper", new { id = item.JobID })
-                        </td>
                     </tr>
                 }
         </table>
         </div>
-        <a href="@Url.Action("create","jobs")">Post New Job</a>
+        <a href="@Url.Action("create","jobs")">Post New Job</a><br>
+        <a href="@Url.Action("index","jobs")">Manage Jobs</a>
     </div>
     <a href="@Url.Action("LogOut","users")">Logout</a>
 </body>

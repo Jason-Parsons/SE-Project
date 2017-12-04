@@ -52,9 +52,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="GMaps">
-      <HintPath>..\..\..\..\Desktop\GMaps.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -154,7 +151,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\jobPicsController.cs" />
     <Compile Include="Controllers\jobsController.cs" />
     <Compile Include="Controllers\organizerController.cs" />
     <Compile Include="Controllers\userAccessesController.cs" />
@@ -232,6 +228,7 @@
     <Content Include="Models\UserModel.edmx.diagram">
       <DependentUpon>UserModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\CommunityImprovement - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -262,11 +259,6 @@
     <Content Include="Views\jobs\Details.cshtml" />
     <Content Include="Views\jobs\Edit.cshtml" />
     <Content Include="Views\jobs\Index.cshtml" />
-    <Content Include="Views\jobPics\Create.cshtml" />
-    <Content Include="Views\jobPics\Delete.cshtml" />
-    <Content Include="Views\jobPics\Details.cshtml" />
-    <Content Include="Views\jobPics\Edit.cshtml" />
-    <Content Include="Views\jobPics\Index.cshtml" />
     <Content Include="Views\users\Create.cshtml" />
     <Content Include="Views\users\Delete.cshtml" />
     <Content Include="Views\users\Details.cshtml" />

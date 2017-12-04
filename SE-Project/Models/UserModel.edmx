@@ -14,21 +14,23 @@
           <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Zipcode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="LocationLat" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="LocationLong" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Time" Type="time" Precision="7" Nullable="false" />
           <Property Name="Description" Type="varchar(max)" Nullable="false" />
           <Property Name="NumVolsNeeded" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="before" Type="varchar" MaxLength="100" />
+          <Property Name="after" Type="varchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="jobPics">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'VolsDB.dbo.jobPic' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="jobPic">
           <Key>
-            <PropertyRef Name="JobID" />
+            <PropertyRef Name="jobID" />
           </Key>
-          <Property Name="JobID" Type="int" Nullable="false" />
-          <Property Name="Before" Type="varchar" MaxLength="50" />
-          <Property Name="After" Type="varchar" MaxLength="50" />
+          <Property Name="jobID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="before" Type="varchar" MaxLength="50" />
+          <Property Name="after" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -80,18 +82,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JobPics_Job">
-          <End Role="job" Type="Self.job" Multiplicity="1" />
-          <End Role="jobPics" Type="Self.jobPics" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="job">
-              <PropertyRef Name="JobID" />
-            </Principal>
-            <Dependent Role="jobPics">
-              <PropertyRef Name="JobID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_UserAccess">
           <End Role="userAccess" Type="Self.userAccess" Multiplicity="1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
@@ -130,18 +120,20 @@
         </Association>
         <EntityContainer Name="VolsDBModelStoreContainer">
           <EntitySet Name="job" EntityType="Self.job" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="jobPics" EntityType="Self.jobPics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="userAccess" EntityType="Self.userAccess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="userJob" EntityType="Self.userJob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="jobPic" EntityType="Self.jobPic" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [jobPic].[jobID] AS [jobID], 
+    [jobPic].[before] AS [before], 
+    [jobPic].[after] AS [after]
+    FROM [dbo].[jobPic] AS [jobPic]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Job_User" Association="Self.FK_Job_User">
             <End Role="user" EntitySet="user" />
             <End Role="job" EntitySet="job" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobPics_Job" Association="Self.FK_JobPics_Job">
-            <End Role="job" EntitySet="job" />
-            <End Role="jobPics" EntitySet="jobPics" />
           </AssociationSet>
           <AssociationSet Name="FK_User_UserAccess" Association="Self.FK_User_UserAccess">
             <End Role="userAccess" EntitySet="userAccess" />
@@ -169,25 +161,15 @@
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LocationLat" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="LocationLong" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NumVolsNeeded" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <NavigationProperty Name="user" Relationship="Self.FK_Job_User" FromRole="job" ToRole="user" />
-          <NavigationProperty Name="jobPic" Relationship="Self.FK_JobPics_Job" FromRole="job" ToRole="jobPics" />
           <NavigationProperty Name="userJobs" Relationship="Self.FK_UserJob_Job" FromRole="job" ToRole="userJob" />
-        </EntityType>
-        <EntityType Name="jobPic">
-          <Key>
-            <PropertyRef Name="JobID" />
-          </Key>
-          <Property Name="JobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="Before" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="After" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="job" Relationship="Self.FK_JobPics_Job" FromRole="jobPics" ToRole="job" />
+          <Property Name="before" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="after" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -245,18 +227,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JobPics_Job">
-          <End Role="job" Type="Self.job" Multiplicity="1" />
-          <End Role="jobPics" Type="Self.jobPic" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="job">
-              <PropertyRef Name="JobID" />
-            </Principal>
-            <Dependent Role="jobPics">
-              <PropertyRef Name="JobID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserJob_Job">
           <End Role="job" Type="Self.job" Multiplicity="1" />
           <End Role="userJob" Type="Self.userJob" Multiplicity="*" />
@@ -295,7 +265,6 @@
         </Association>
         <EntityContainer Name="VolsDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="jobs" EntityType="Self.job" />
-          <EntitySet Name="jobPics" EntityType="Self.jobPic" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="users" EntityType="Self.user" />
           <EntitySet Name="userAccesses" EntityType="Self.userAccess" />
@@ -303,10 +272,6 @@
           <AssociationSet Name="FK_Job_User" Association="Self.FK_Job_User">
             <End Role="user" EntitySet="users" />
             <End Role="job" EntitySet="jobs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JobPics_Job" Association="Self.FK_JobPics_Job">
-            <End Role="job" EntitySet="jobs" />
-            <End Role="jobPics" EntitySet="jobPics" />
           </AssociationSet>
           <AssociationSet Name="FK_UserJob_Job" Association="Self.FK_UserJob_Job">
             <End Role="job" EntitySet="jobs" />
@@ -320,7 +285,16 @@
             <End Role="user" EntitySet="users" />
             <End Role="userJob" EntitySet="userJobs" />
           </AssociationSet>
+          <EntitySet Name="jobPics" EntityType="VolsDBModel.jobPic" />
         </EntityContainer>
+        <EntityType Name="jobPic">
+          <Key>
+            <PropertyRef Name="jobID" />
+          </Key>
+          <Property Name="jobID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="before" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="after" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -330,27 +304,18 @@
           <EntitySetMapping Name="jobs">
             <EntityTypeMapping TypeName="VolsDBModel.job">
               <MappingFragment StoreEntitySet="job">
+                <ScalarProperty Name="after" ColumnName="after" />
+                <ScalarProperty Name="before" ColumnName="before" />
                 <ScalarProperty Name="JobID" ColumnName="JobID" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
-                <ScalarProperty Name="LocationLat" ColumnName="LocationLat" />
-                <ScalarProperty Name="LocationLong" ColumnName="LocationLong" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="NumVolsNeeded" ColumnName="NumVolsNeeded" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="jobPics">
-            <EntityTypeMapping TypeName="VolsDBModel.jobPic">
-              <MappingFragment StoreEntitySet="jobPics">
-                <ScalarProperty Name="JobID" ColumnName="JobID" />
-                <ScalarProperty Name="Before" ColumnName="Before" />
-                <ScalarProperty Name="After" ColumnName="After" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -393,6 +358,15 @@
                 <ScalarProperty Name="UserJobID" ColumnName="UserJobID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="JobID" ColumnName="JobID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jobPics">
+            <EntityTypeMapping TypeName="VolsDBModel.jobPic">
+              <MappingFragment StoreEntitySet="jobPic">
+                <ScalarProperty Name="after" ColumnName="after" />
+                <ScalarProperty Name="before" ColumnName="before" />
+                <ScalarProperty Name="jobID" ColumnName="jobID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
