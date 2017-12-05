@@ -21,20 +21,20 @@
             <h3>Find Jobs</h3>
             <input class="form-control" id="myInput" type="text" placeholder="Search city...">
         </div>
-    </div>
 
 
 
-    @{ 
-        var x = ViewBag.table1 as IEnumerable<SE_Project.Models.job>;
-        var y = ViewBag.table2 as IEnumerable<SE_Project.Models.userJob>;
-    }
 
-    <div id="listbox">
+        @{
+            var x = ViewBag.table1 as IEnumerable<SE_Project.Models.job>;
+            var y = ViewBag.table2 as IEnumerable<SE_Project.Models.userJob>;
+        }
+
+        <div id="listbox">
 
 
-        <div>
-            
+            <div>
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -42,16 +42,16 @@
                                 Description
                             </th>
                             <th>
-                               Date
+                                Date
                             </th>
                             <th>
-                               Address
+                                Address
                             </th>
                             <th>
-                               City
+                                City
                             </th>
                         </tr>
-                     </thead>
+                    </thead>
                     <tbody id="myTable">
                         @foreach (var item in x)
             {
@@ -73,61 +73,63 @@
                                 </td>
                             </tr>
                         }
-                        </tbody>
+                    </tbody>
                 </table>
             </div>
-            
-       
-    </div>
+
+
+        </div>
 
 
 
 
-    <div id="jobsbox">
+        <div id="jobsbox">
 
-    <div>
+            <div>
 
-        <table class="table">
-            <tr>
-                <th>
-                   Address
-                </th>
-                <th>
-                   Date
-                </th>
-                <th>
-                   Time
-                </th>
-                <th>
-                    Description
-                </th>
-            </tr>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Address
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th>
+                            Time
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                    </tr>
 
-            @foreach (var item in y)
+                    @foreach (var item in y)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.job.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.job.Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.job.Time)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.job.Description)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Remove Job", "RemoveJob", "userJobs", new { id = item.JobID },null)
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.job.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.job.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.job.Time)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.job.Description)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Remove Job", "RemoveJob", "userJobs", new { id = item.JobID }, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
 
+           
+        </div>
+    </div>
     <a href="@Url.Action("LogOut","users")">Logout</a>
-</div>
     </body>
 
 
