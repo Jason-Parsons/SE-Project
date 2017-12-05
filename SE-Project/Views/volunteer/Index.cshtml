@@ -26,9 +26,11 @@
 
 
     @{ 
-        var x = ViewBag.table1 as IEnumerable<SE_Project.Models.job>;
-        var y = ViewBag.table2 as IEnumerable<SE_Project.Models.userJob>;
-    }
+         var x = ViewBag.table1 as IEnumerable<SE_Project.Models.job>;
+         var y = ViewBag.table2 as IEnumerable<SE_Project.Models.userJob>;
+         int actUser;
+         int actJob;
+     }
 
     <div id="listbox">
 
@@ -69,7 +71,7 @@
                                     @Html.DisplayFor(modelItem => item.City)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Add Job", "Add_Job")
+                                    @Html.ActionLink("Add Job", "Add_Job");
                                 </td>
                             </tr>
                         }
@@ -119,7 +121,7 @@
                         @Html.DisplayFor(modelItem => item.job.Description)
                     </td>
                     <td>
-                        @Html.ActionLink("Remove Job", "RemoveJob", "userJobs", new { id = item.JobID },null)
+                        @Html.ActionLink("Remove Job", "RemoveJob", "userJobs", new { id = item.job.JobID },null)
                     </td>
                 </tr>
             }

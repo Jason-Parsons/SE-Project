@@ -16,7 +16,6 @@ namespace SE_Project.Controllers
     {
         private VolsDBEntities db = new VolsDBEntities();
 
-
         public ActionResult Index()
         {
             if ((string)Session["isLoggedIn"] == "yes")
@@ -44,12 +43,22 @@ namespace SE_Project.Controllers
             
         }
 
-        public ActionResult Add_Job()
+
+          public ActionResult Add_Job()
         {
-            
-           
-            return RedirectToAction("Index", "volunteer");
-        }
+               if ((int)Session["userJobID"] > -1)
+               {
+                    int usID = (int)Session["userID"];
+                    int jID = (int)Session["jobID"];
+                    int usjID = (int)Session["userJobID"];
+
+                    userJob ujID = new userJob(usjID, usID, jID);
+
+               }
+
+               
+               return RedirectToAction("Index", "volunteer");
+          }
 
 
     }
