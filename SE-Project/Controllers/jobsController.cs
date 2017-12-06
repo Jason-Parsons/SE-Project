@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SE_Project.Models;
+using System.Runtime.Remoting.Contexts;
 
 namespace SE_Project.Controllers
 {
@@ -57,7 +58,7 @@ namespace SE_Project.Controllers
         // GET: jobs/Create
         public ActionResult Create()
         {
-           ViewBag.CreatedBy = new SelectList(db.users, "UserID", "FirstName");
+            ViewBag.CreatedBy = new SelectList(db.users, "UserID", "FirstName");
             return View();
         }
 
@@ -66,22 +67,46 @@ namespace SE_Project.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "JobID,Address,City,State,Zipcode,LocationLat,LocationLong,Date,Time,Description,NumVolsNeeded,CreatedBy")] job job)
+        public ActionResult Create([Bind(Include = "JobID,Address,City,State,Zipcode,Date,Time,Description,NumVolsNeeded,CreatedBy")] job job)
         {
             if (ModelState.IsValid)
             {
                 // var geocoder = new google.maps.Geocoder();
                 // private string src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBsV_j3UnupXN7XKDIIldbskUI8IbhnNuw&callback=initMap";
-                 
+
                 db.jobs.Add(job);
                 db.SaveChanges();
                 return RedirectToAction("Index", "organizer");
             }
             int id = (int)Session["userID"];
             ViewBag.CreatedBy = new SelectList(db.users.Where(x => x.UserID == id), "UserID", "FirstName", job.CreatedBy);
-            
+
             return View(job);
         }
+
+        public ActionResult AddPictures()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPictures(job job)
+        {
+            if (ModelState.IsValid)
+            {
+                db.jobs.Attach(job);
+                db.Entry(job).Property(x => x.before).IsModified = true;
+                db.Entry(job).Property(x => x.after).IsModified = true;
+                db.Configuration.ValidateOnSaveEnabled = false;
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            ViewBag.CreatedBy = Session["userID"];
+            return View(job);
+        }
+
 
         // GET: jobs/Edit/5
         public ActionResult Edit(int? id)
@@ -96,7 +121,7 @@ namespace SE_Project.Controllers
                 return HttpNotFound();
             }
             ViewBag.CreatedBy = new SelectList(db.users, "UserID", "FirstName", job.CreatedBy);
-            
+
             return View(job);
         }
 
@@ -105,7 +130,7 @@ namespace SE_Project.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "JobID,Address,City,State,Zipcode,LocationLat,LocationLong,Date,Time,Description,NumVolsNeeded,CreatedBy")] job job)
+        public ActionResult Edit([Bind(Include = "JobID,Address,City,State,Zipcode,Date,Time,Description,NumVolsNeeded,CreatedBy")] job job)
         {
             if (ModelState.IsValid)
             {
@@ -114,7 +139,7 @@ namespace SE_Project.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CreatedBy = Session["userID"];
-            
+
             return View(job);
         }
 

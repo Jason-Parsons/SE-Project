@@ -3,24 +3,43 @@
 }
 <h2>@ViewData["Title"].</h2>
 
-
+@model SE_Project.Models.job
 
 <body>
 
 
     <div id="largebox">
         <div id="descriptionbox">
-            <p>Description box</p>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+            </dl>
+        </div>
         </div>
         <div id="beforebox">
-            <p>Before pic</p>
-        </div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.before)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.before)
+                </dd>
+            </dl>
+            </div>
         <div id="afterbox">
-            <p>After Pic</p>
-        </div>
-
-
-    </div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.after)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.after)
+                </dd>
+            </dl>
+      </div>
 
 
 

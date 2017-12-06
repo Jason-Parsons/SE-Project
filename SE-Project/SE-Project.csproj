@@ -277,6 +277,7 @@
     <Content Include="Views\organizer\Index.cshtml" />
     <Content Include="Views\volunteer\Index.cshtml" />
     <Content Include="Views\users\Success.cshtml" />
+    <Content Include="Views\jobs\AddPictures.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

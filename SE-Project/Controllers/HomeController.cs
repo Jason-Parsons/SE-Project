@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using SE_Project.Models;
+using PagedList;
 
 namespace SE_Project.Controllers
 {
     public class HomeController : Controller
     {
+        private VolsDBEntities db = new VolsDBEntities();
+
         public ActionResult Index()
         {
             if ((string)Session["isLoggedIn"] == "yes")
@@ -28,11 +35,45 @@ namespace SE_Project.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Contact(int? id)
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your application description page.";
+            job job = db.jobs.Find(id);
+            if (id == null)
+            {
+                id = 1;
+                return View(job);
+            }
+            return View(job);
+        }
 
-            return View();
+        public ActionResult ContactNext(int? id)
+        {
+            job job = db.jobs.Find(id);
+            if (id == null)
+            {
+                id = 1;
+                return View(job);
+            }
+            else
+            {
+                id++;
+                return View(job);
+            }
+        }
+        public ActionResult ContactBefore(int? id)
+        {
+            job job = db.jobs.Find(id);
+            if (id == null)
+            {
+                id = 1;
+                return View(job);
+            }
+            else
+            {
+                id--;
+                return View(job);
+            }
         }
     }
 }
