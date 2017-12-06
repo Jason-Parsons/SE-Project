@@ -27,7 +27,7 @@ textarea {
 #largebox {
     width: 1000px;
     height: 700px;
-    background-color: blue;
+   
     padding-top: 50px;
     padding-left: 10px;
     padding-right: 10px;
@@ -63,7 +63,7 @@ textarea {
 #postedbox {
     height: 550px;
     width: 950px;
-    background-color: yellow;
+    
     float: left;
     margin: 10px;
 }
@@ -71,7 +71,7 @@ textarea {
 #newpostbox {
     height: 600px;
     width: 450px;
-    background-color: red;
+    
     float: right;
     margin: 10px;
 }
@@ -79,7 +79,7 @@ textarea {
 #mapbox {
     height: 200px;
     width: 400px;
-    background-color: grey;
+   
     float: left;
     margin: 10px;
 }
@@ -87,7 +87,7 @@ textarea {
 #listbox {
     height: 600px;
     width: 450px;
-    background-color: yellow;
+    
     float: right;
     margin: 10px;
 }
@@ -95,7 +95,7 @@ textarea {
 #jobsbox {
     height: 300px;
     width: 450px;
-    background-color: green;
+    
     float: left;
     margin: 10px;
 }

@@ -14,7 +14,7 @@ namespace SE_Project.Models
     
     public partial class userJob
     {
-        public int UserJobID { get; set; }
+         public int UserJobID { get; set; }
         public int UserID { get; set; }
         public int JobID { get; set; }
     

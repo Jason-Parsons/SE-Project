@@ -16,7 +16,6 @@ namespace SE_Project.Controllers
     {
         private VolsDBEntities db = new VolsDBEntities();
 
-
         public ActionResult Index()
         {
             if ((string)Session["isLoggedIn"] == "yes")
@@ -45,7 +44,12 @@ namespace SE_Project.Controllers
         }
 
 
+          public ActionResult Add_Job()
+        {
 
+               
+               return RedirectToAction("Index", "userJobs");
+          }
 
     }
 }
