@@ -81,53 +81,6 @@
         </div>
 
 
-
-
-        <div id="jobsbox">
-
-            <div>
-
-                <table class="table">
-                    <tr>
-                        <th>
-                            Address
-                        </th>
-                        <th>
-                            Date
-                        </th>
-                        <th>
-                            Time
-                        </th>
-                        <th>
-                            Description
-                        </th>
-                    </tr>
-
-                    @foreach (var item in y)
-            {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.job.Address)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.job.Date)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.job.Time)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.job.Description)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Remove Job", "RemoveJob", "userJobs", new { id = item.UserJobID }, null)
-                            </td>
-                        </tr>
-                    }
-                </table>
-            </div>
-
-           
-        </div>
     </div>
     <a href="@Url.Action("LogOut","users")">Logout</a>
     </body>
