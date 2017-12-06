@@ -46,20 +46,10 @@ namespace SE_Project.Controllers
 
           public ActionResult Add_Job()
         {
-               if ((int)Session["userJobID"] > -1)
-               {
-                    int usID = (int)Session["userID"];
-                    int jID = (int)Session["jobID"];
-                    int usjID = (int)Session["userJobID"];
-
-                    userJob ujID = new userJob(usjID, usID, jID);
-
-               }
 
                
-               return RedirectToAction("Index", "volunteer");
+               return RedirectToAction("Index", "userJobs");
           }
-
 
     }
 }

@@ -1,13 +1,21 @@
 ﻿@model IEnumerable<SE_Project.Models.userJob>
 
 @{
+     if (Session["userID"] == null)
+     {
+          Response.Redirect("~/users/login");
+     }
+}
+ 
+@{
     ViewBag.Title = "Index";
 }
 
+<h2>Welcome @Session["userName"].ToString()</h2>
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Sign up for a job", "Create")
 </p>
 <table class="table">
     <tr>
@@ -37,3 +45,4 @@
 }
 
 </table>
+<a href="@Url.Action("LogOut","users")">Logout</a>

@@ -14,17 +14,6 @@ namespace SE_Project.Models
     
     public partial class userJob
     {
-        /*  private int usjID;
-          private int usID;
-          private int jID;
-
-          public userJob(int usjID, int usID, int jID)
-          {
-               this.usjID = usjID;
-               this.usID = usID;
-               this.jID = jID;
-          }*/
-
          public int UserJobID { get; set; }
         public int UserID { get; set; }
         public int JobID { get; set; }
